@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aryan Mehta — Data Analyst</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --ink:#1A1A2E;--ink2:#16213E;
+  --saffron:#F5A623;--saffron-pale:rgba(245,166,35,0.12);
+  --jade:#00B894;--jade-pale:rgba(0,184,148,0.1);
+  --coral:#E17055;
+  --violet:#6C63FF;
+  --slate:#F0F2F5;--slate2:#E4E7ED;
+  --white:#FFFFFF;
+  --text-ink:#1A1A2E;--text-mid:#4A5568;--text-light:#718096;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--white);color:var(--text-ink);overflow-x:hidden;line-height:1.7}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--saffron);color:var(--ink)}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 2rem;background:rgba(26,26,46,0.96);backdrop-filter:blur(16px);border-bottom:1px solid rgba(245,166,35,0.15)}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px}
+.nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;color:var(--saffron);letter-spacing:.02em}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:rgba(255,255,255,0.65);font-size:.78rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;transition:color .25s}
+.nav-links a:hover{color:var(--saffron)}
+.hamburger{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:4px}
+.hamburger span{display:block;width:22px;height:2px;background:#fff;transition:all .3s}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+
+/* ── HERO — warm mocha chapter ── */
+.hero{min-height:100vh;background:linear-gradient(135deg,#2D1B0E 0%,#1A1A2E 60%,#0D2137 100%);display:flex;align-items:center;padding:80px 2rem 4rem;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 80% 50%,rgba(245,166,35,0.08) 0%,transparent 70%);pointer-events:none}
+.hero-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;width:100%}
+.hero-label{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--saffron);letter-spacing:.2em;text-transform:uppercase;margin-bottom:1rem;display:flex;align-items:center;gap:.6rem}
+.hero-label::before{content:'';width:24px;height:1px;background:var(--saffron)}
+.hero-name{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2.8rem,5vw,4.2rem);color:#fff;line-height:1.05;margin-bottom:.5rem}
+.hero-name span{color:var(--saffron)}
+.hero-title{font-family:'Syne',sans-serif;font-size:clamp(1rem,2vw,1.35rem);color:rgba(255,255,255,0.5);font-weight:400;margin-bottom:1.5rem;letter-spacing:.02em}
+.hero-desc{font-size:.95rem;color:rgba(255,255,255,0.65);line-height:1.85;max-width:480px;margin-bottom:2rem}
+.hero-btns{display:flex;gap:.75rem;flex-wrap:wrap}
+.btn-primary{background:var(--saffron);color:var(--ink);font-weight:700;font-size:.82rem;padding:.8rem 1.75rem;border-radius:6px;letter-spacing:.04em;transition:all .3s;display:inline-flex;align-items:center;gap:.5rem}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(245,166,35,0.35)}
+.btn-outline{background:transparent;color:#fff;font-weight:600;font-size:.82rem;padding:.8rem 1.75rem;border-radius:6px;border:1.5px solid rgba(255,255,255,0.2);letter-spacing:.04em;transition:all .3s}
+.btn-outline:hover{border-color:var(--saffron);color:var(--saffron)}
+
+/* Hero right — data stream panel */
+.hero-panel{background:rgba(255,255,255,0.04);border:1px solid rgba(245,166,35,0.15);border-radius:16px;padding:1.75rem;backdrop-filter:blur(8px)}
+.panel-header{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:rgba(255,255,255,0.35);letter-spacing:.15em;text-transform:uppercase;margin-bottom:1.25rem;display:flex;justify-content:space-between}
+.panel-header span{color:var(--jade);animation:blink .9s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.metric-grid{display:grid;grid-template-columns:1fr 1fr;gap:.85rem;margin-bottom:1.25rem}
+.metric{background:rgba(255,255,255,0.04);border-radius:10px;padding:1rem;border:1px solid rgba(255,255,255,0.06)}
+.metric-val{font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;line-height:1;margin-bottom:.2rem}
+.metric-val.gold{color:var(--saffron)}
+.metric-val.green{color:var(--jade)}
+.metric-val.coral{color:var(--coral)}
+.metric-val.violet{color:#A78BFA}
+.metric-lbl{font-size:.68rem;color:rgba(255,255,255,0.4);letter-spacing:.05em;text-transform:uppercase}
+.stream{border-top:1px solid rgba(255,255,255,0.07);padding-top:1rem}
+.stream-row{display:flex;justify-content:space-between;align-items:center;padding:.3rem 0;font-family:'JetBrains Mono',monospace;font-size:.7rem}
+.stream-key{color:rgba(255,255,255,0.35)}
+.stream-val{color:var(--jade)}
+.stream-bar{height:3px;background:rgba(255,255,255,0.07);border-radius:2px;margin:.15rem 0;overflow:hidden}
+.stream-fill{height:100%;border-radius:2px;animation:load 1.8s ease forwards}
+@keyframes load{from{width:0}to{width:var(--w)}}
+
+/* ── SKILLS — clean minimal chapter ── */
+.skills-section{background:var(--white);padding:6rem 2rem}
+.section-container{max-width:1200px;margin:0 auto}
+.section-eyebrow{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--text-light);letter-spacing:.2em;text-transform:uppercase;margin-bottom:.6rem}
+.section-heading{font-family:'Syne',sans-serif;font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:800;color:var(--text-ink);margin-bottom:.5rem;line-height:1.15}
+.section-sub{font-size:.95rem;color:var(--text-mid);max-width:520px;margin-bottom:3rem;line-height:1.8}
+.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.skill-card{background:var(--slate);border-radius:14px;padding:1.75rem;border:1px solid var(--slate2);transition:all .3s;cursor:default}
+.skill-card:hover{transform:translateY(-4px);border-color:var(--saffron);box-shadow:0 12px 32px rgba(245,166,35,0.1)}
+.skill-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;margin-bottom:1rem}
+.skill-icon.gold{background:rgba(245,166,35,0.12)}
+.skill-icon.green{background:var(--jade-pale)}
+.skill-icon.coral{background:rgba(225,112,85,0.1)}
+.skill-icon.violet{background:rgba(108,99,255,0.1)}
+.skill-name{font-family:'Syne',sans-serif;font-weight:700;font-size:.95rem;margin-bottom:.75rem;color:var(--text-ink)}
+.tag-list{display:flex;flex-wrap:wrap;gap:.4rem}
+.tag{font-size:.7rem;font-weight:600;padding:.3rem .65rem;border-radius:4px;background:var(--white);border:1px solid var(--slate2);color:var(--text-mid);letter-spacing:.03em}
+.tag.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+/* ── PROJECTS — dark mode chapter ── */
+.projects-section{background:var(--ink);padding:6rem 2rem}
+.projects-section .section-eyebrow{color:rgba(255,255,255,0.35)}
+.projects-section .section-heading{color:#fff}
+.projects-section .section-sub{color:rgba(255,255,255,0.5)}
+.projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem}
+.project-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:2rem;transition:all .35s;cursor:pointer}
+.project-card:hover{background:rgba(255,255,255,0.07);border-color:rgba(245,166,35,0.3);transform:translateY(-3px)}
+.proj-tag{font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;padding:.25rem .6rem;border-radius:4px;display:inline-block;margin-bottom:1rem}
+.proj-tag.bi{background:rgba(245,166,35,0.15);color:var(--saffron)}
+.proj-tag.py{background:var(--jade-pale);color:var(--jade)}
+.proj-tag.sql{background:rgba(108,99,255,0.15);color:#A78BFA}
+.proj-tag.dash{background:rgba(225,112,85,0.15);color:var(--coral)}
+.proj-title{font-family:'Syne',sans-serif;font-weight:700;font-size:1.1rem;color:#fff;margin-bottom:.6rem;line-height:1.3}
+.proj-desc{font-size:.85rem;color:rgba(255,255,255,0.5);line-height:1.75;margin-bottom:1.25rem}
+.proj-metrics{display:flex;gap:1.25rem}
+.proj-metric{font-family:'Syne',sans-serif}
+.proj-metric-val{font-size:1.25rem;font-weight:800;color:var(--saffron);line-height:1}
+.proj-metric-lbl{font-size:.65rem;color:rgba(255,255,255,0.3);letter-spacing:.05em;text-transform:uppercase;margin-top:.2rem}
+.proj-footer{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid rgba(255,255,255,0.07)}
+.chip{font-size:.65rem;padding:.2rem .5rem;border-radius:3px;background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.4);font-family:'JetBrains Mono',monospace}
+
+/* ── EXPERIENCE — back to light ── */
+.exp-section{background:var(--slate);padding:6rem 2rem}
+.timeline{max-width:760px;margin:0 auto;position:relative}
+.timeline::before{content:'';position:absolute;left:20px;top:0;bottom:0;width:1px;background:var(--slate2)}
+.exp-item{display:flex;gap:2rem;margin-bottom:2.5rem;position:relative}
+.exp-dot{width:41px;flex-shrink:0;display:flex;justify-content:center;padding-top:.35rem}
+.exp-dot-inner{width:13px;height:13px;border-radius:50%;background:var(--saffron);border:2px solid var(--white);box-shadow:0 0 0 3px rgba(245,166,35,0.2);flex-shrink:0;z-index:1}
+.exp-body{background:var(--white);border-radius:14px;padding:1.5rem;border:1px solid var(--slate2);flex:1;transition:box-shadow .3s}
+.exp-body:hover{box-shadow:0 8px 24px rgba(0,0,0,0.07)}
+.exp-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:.5rem;margin-bottom:.3rem}
+.exp-role{font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;color:var(--text-ink)}
+.exp-date{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--text-light);letter-spacing:.05em;background:var(--slate);padding:.2rem .6rem;border-radius:4px}
+.exp-company{font-size:.82rem;color:var(--saffron);font-weight:600;margin-bottom:.75rem}
+.exp-list{list-style:none;display:flex;flex-direction:column;gap:.5rem}
+.exp-list li{font-size:.85rem;color:var(--text-mid);padding-left:1rem;position:relative;line-height:1.75}
+.exp-list li::before{content:'▸';position:absolute;left:0;color:var(--saffron);font-size:.75rem;top:.05em}
+
+/* ── CONTACT — bold colorful chapter ── */
+.contact-section{background:linear-gradient(135deg,#6C63FF 0%,#00B894 50%,#F5A623 100%);padding:6rem 2rem;position:relative;overflow:hidden}
+.contact-section::before{content:'';position:absolute;inset:0;background:rgba(26,26,46,0.72)}
+.contact-inner{position:relative;z-index:1;max-width:1200px;margin:0 auto;text-align:center}
+.contact-section .section-eyebrow{color:rgba(255,255,255,0.55);margin-bottom:.6rem}
+.contact-section .section-heading{color:#fff;margin-bottom:.75rem}
+.contact-section .section-sub{color:rgba(255,255,255,0.65);margin:0 auto 3rem}
+.contact-cards{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}
+.contact-card{background:rgba(255,255,255,0.1);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.2);border-radius:14px;padding:1.5rem 2rem;transition:all .3s;min-width:200px}
+.contact-card:hover{background:rgba(255,255,255,0.18);transform:translateY(-3px)}
+.contact-card-icon{font-size:1.4rem;margin-bottom:.5rem}
+.contact-card-label{font-size:.7rem;color:rgba(255,255,255,0.5);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.25rem;font-family:'JetBrains Mono',monospace}
+.contact-card-val{font-size:.9rem;font-weight:600;color:#fff}
+.avail-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(0,184,148,0.2);border:1px solid rgba(0,184,148,0.4);color:var(--jade);border-radius:20px;padding:.4rem 1rem;font-size:.75rem;font-weight:600;margin-bottom:2rem}
+.avail-dot{width:7px;height:7px;border-radius:50%;background:var(--jade);animation:pulse-dot 1.5s infinite}
+@keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.7)}}
+
+/* ── FOOTER ── */
+footer{background:var(--ink2);padding:1.5rem 2rem;text-align:center}
+footer p{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:rgba(255,255,255,0.25);letter-spacing:.08em}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease}
+.reveal.show{opacity:1;transform:translateY(0)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr}
+  .hero-panel{display:none}
+  .skills-grid{grid-template-columns:1fr 1fr}
+  .projects-grid{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  nav{padding:0 1rem}
+  .nav-links{position:fixed;top:56px;left:0;right:0;bottom:0;background:rgba(26,26,46,0.97);flex-direction:column;align-items:center;justify-content:center;gap:2rem;transform:translateX(100%);transition:transform .35s}
+  .nav-links.open{transform:translateX(0)}
+  .hamburger{display:flex}
+  .hero{padding:80px 1rem 3rem}
+  .hero-name{font-size:2.4rem}
+  .skills-section,.projects-section,.exp-section,.contact-section{padding:4rem 1rem}
+  .skills-grid{grid-template-columns:1fr}
+  .proj-metrics{flex-wrap:wrap;gap:.75rem}
+  .contact-cards{flex-direction:column;align-items:center}
+  .contact-card{width:100%;max-width:320px}
+  .exp-item{gap:1rem}
+  .timeline::before{left:16px}
+}
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+  *{animation-duration:.01ms!important}
+}
+
+.proj-img-wrap{border-radius:12px 12px 0 0;overflow:hidden;border-bottom:1px solid rgba(255,255,255,0.06);margin:-2rem -2rem 1.5rem -2rem}
+.proj-img-wrap svg{display:block;width:100%}
+.hero-headshot{border-radius:16px;overflow:hidden;border:1px solid rgba(245,166,35,0.2);box-shadow:0 20px 60px rgba(0,0,0,0.4);margin-bottom:1.25rem}
+.hero-headshot svg{display:block;width:100%}
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo">AM.</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="hero" id="hero">
+  <div class="hero-grid">
+    <div>
+      <div class="hero-label">Available for full-time roles</div>
+      <h1 class="hero-name">Aryan<br><span>Mehta</span></h1>
+      <p class="hero-title">Senior Data Analyst · BI &amp; Insights</p>
+      <p class="hero-desc">I turn raw data into decisions that move businesses forward. Specialising in SQL, Python, Power BI, and building analytics systems that teams actually use — from fintech pipelines to retail dashboards.</p>
+      <div class="hero-btns">
+        <a href="#projects" class="btn-primary">View My Work →</a>
+        <a href="#contact" class="btn-outline">Get in Touch</a>
+      </div>
+    </div>
+
+    <div class="hero-headshot">
+      <svg viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="abg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#1A1A2E"/><stop offset="100%" style="stop-color:#0D2137"/></linearGradient>
+          <linearGradient id="askin" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:#C8845A"/><stop offset="100%" style="stop-color:#A86840"/></linearGradient>
+          <linearGradient id="ahair" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:#1A0E08"/><stop offset="100%" style="stop-color:#0D0704"/></linearGradient>
+          <pattern id="agrid" width="28" height="28" patternUnits="userSpaceOnUse"><path d="M 28 0 L 0 0 0 28" fill="none" stroke="rgba(245,166,35,0.05)" stroke-width="1"/></pattern>
+        </defs>
+        <rect width="400" height="240" fill="url(#abg)"/>
+        <rect width="400" height="240" fill="url(#agrid)"/>
+        <circle cx="200" cy="100" r="140" fill="rgba(245,166,35,0.04)"/>
+        <!-- Desk -->
+        <rect x="0" y="185" width="400" height="55" fill="rgba(0,0,0,0.22)"/>
+        <rect x="0" y="183" width="400" height="6" fill="rgba(255,255,255,0.04)"/>
+        <!-- Laptop on desk -->
+        <rect x="110" y="180" width="180" height="8" rx="2" fill="#1A0E08"/>
+        <rect x="114" y="158" width="172" height="26" rx="4 4 0 0" fill="#2C1810"/>
+        <rect x="118" y="161" width="164" height="22" rx="2" fill="#0f0f1a"/>
+        <text x="128" y="170" font-family="monospace" font-size="5.5" fill="#F5A623">SELECT avg(accuracy) FROM models</text>
+        <text x="128" y="179" font-family="monospace" font-size="5.5" fill="#00B894">-- Result: 0.924 ✓</text>
+        <!-- Body -->
+        <ellipse cx="200" cy="225" rx="95" ry="55" fill="#1A2A4A"/>
+        <path d="M168 172 Q200 190 232 172 L236 185 Q200 208 164 185Z" fill="#162040"/>
+        <!-- Neck -->
+        <rect x="188" y="138" width="24" height="38" rx="9" fill="url(#askin)"/>
+        <!-- Face -->
+        <ellipse cx="200" cy="112" rx="62" ry="70" fill="url(#askin)"/>
+        <!-- Hair short, neat -->
+        <ellipse cx="200" cy="60" rx="63" ry="40" fill="url(#ahair)"/>
+        <rect x="138" y="74" width="16" height="48" rx="7" fill="url(#ahair)" opacity=".9"/>
+        <rect x="246" y="74" width="16" height="48" rx="7" fill="url(#ahair)" opacity=".9"/>
+        <!-- Ear -->
+        <ellipse cx="138" cy="112" rx="8" ry="11" fill="#B87050"/>
+        <ellipse cx="262" cy="112" rx="8" ry="11" fill="#B87050"/>
+        <!-- Eyes -->
+        <ellipse cx="180" cy="106" rx="11" ry="8" fill="white"/>
+        <ellipse cx="183" cy="106" rx="6" ry="6" fill="#1A0E08"/>
+        <circle cx="185" cy="104" r="1.5" fill="white"/>
+        <path d="M169 99 Q180 94 191 99" stroke="#1A0E08" stroke-width="1.6" fill="none"/>
+        <ellipse cx="220" cy="106" rx="11" ry="8" fill="white"/>
+        <ellipse cx="217" cy="106" rx="6" ry="6" fill="#1A0E08"/>
+        <circle cx="215" cy="104" r="1.5" fill="white"/>
+        <path d="M209 99 Q220 94 231 99" stroke="#1A0E08" stroke-width="1.6" fill="none"/>
+        <!-- Glasses -->
+        <rect x="167" y="99" width="28" height="18" rx="6" fill="none" stroke="rgba(245,166,35,0.55)" stroke-width="1.7"/>
+        <rect x="205" y="99" width="28" height="18" rx="6" fill="none" stroke="rgba(245,166,35,0.55)" stroke-width="1.7"/>
+        <line x1="195" y1="108" x2="205" y2="108" stroke="rgba(245,166,35,0.55)" stroke-width="1.7"/>
+        <line x1="140" y1="108" x2="167" y2="108" stroke="rgba(245,166,35,0.35)" stroke-width="1.4"/>
+        <line x1="233" y1="108" x2="260" y2="108" stroke="rgba(245,166,35,0.35)" stroke-width="1.4"/>
+        <!-- Nose & smile -->
+        <path d="M196 122 Q200 133 204 122" stroke="#9A6040" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+        <path d="M186 147 Q200 158 214 147" stroke="#904030" stroke-width="1.7" fill="none" stroke-linecap="round"/>
+        <!-- Badge -->
+        <rect x="120" y="198" width="160" height="26" rx="6" fill="rgba(245,166,35,0.14)" stroke="rgba(245,166,35,0.28)" stroke-width="1"/>
+        <text x="200" y="210" font-family="sans-serif" font-size="7.5" fill="#F5A623" font-weight="bold" text-anchor="middle">Aryan Mehta</text>
+        <text x="200" y="220" font-family="sans-serif" font-size="6" fill="rgba(245,166,35,0.6)" text-anchor="middle">Senior Data Analyst · Bangalore</text>
+      </svg>
+    </div>
+    <div class="hero-panel">
+      <div class="panel-header">
+        <span>analytics_live.py</span>
+        <span>● RUNNING</span>
+      </div>
+      <div class="metric-grid">
+        <div class="metric">
+          <div class="metric-val gold" id="cnt1">0</div>
+          <div class="metric-lbl">Projects Delivered</div>
+        </div>
+        <div class="metric">
+          <div class="metric-val green" id="cnt2">0%</div>
+          <div class="metric-lbl">Avg. Accuracy Gain</div>
+        </div>
+        <div class="metric">
+          <div class="metric-val coral" id="cnt3">0</div>
+          <div class="metric-lbl">Dashboards Built</div>
+        </div>
+        <div class="metric">
+          <div class="metric-val violet" id="cnt4">0</div>
+          <div class="metric-lbl">Stakeholders Served</div>
+        </div>
+      </div>
+      <div class="stream">
+        <div class="stream-row"><span class="stream-key">SQL</span><span class="stream-val">Expert</span></div>
+        <div class="stream-bar"><div class="stream-fill" style="--w:95%;background:var(--saffron)"></div></div>
+        <div class="stream-row"><span class="stream-key">Python</span><span class="stream-val">Advanced</span></div>
+        <div class="stream-bar"><div class="stream-fill" style="--w:85%;background:var(--jade)"></div></div>
+        <div class="stream-row"><span class="stream-key">Power BI</span><span class="stream-val">Advanced</span></div>
+        <div class="stream-bar"><div class="stream-fill" style="--w:88%;background:#A78BFA"></div></div>
+        <div class="stream-row"><span class="stream-key">Excel</span><span class="stream-val">Expert</span></div>
+        <div class="stream-bar"><div class="stream-fill" style="--w:92%;background:var(--coral)"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SKILLS ══ -->
+<section class="skills-section" id="skills">
+  <div class="section-container">
+    <p class="section-eyebrow reveal">What I bring</p>
+    <h2 class="section-heading reveal">Skills &amp; Expertise</h2>
+    <p class="section-sub reveal">Four years of hands-on analytical work across fintech, e-commerce, and operations — translating complexity into clarity.</p>
+
+    <div class="skills-grid">
+      <div class="skill-card reveal">
+        <div class="skill-icon gold">📊</div>
+        <div class="skill-name">Data Analysis &amp; BI</div>
+        <div class="tag-list">
+          <span class="tag active">SQL</span><span class="tag active">Python</span><span class="tag">Pandas</span><span class="tag">NumPy</span><span class="tag active">Power BI</span><span class="tag">Tableau</span><span class="tag">Advanced Excel</span><span class="tag">Pivot Tables</span>
+        </div>
+      </div>
+      <div class="skill-card reveal" style="transition-delay:.1s">
+        <div class="skill-icon green">🔁</div>
+        <div class="skill-name">Data Engineering</div>
+        <div class="tag-list">
+          <span class="tag active">ETL Pipelines</span><span class="tag">Data Warehousing</span><span class="tag">MySQL</span><span class="tag">PostgreSQL</span><span class="tag active">BigQuery</span><span class="tag">Data Modelling</span><span class="tag">APIs</span>
+        </div>
+      </div>
+      <div class="skill-card reveal" style="transition-delay:.2s">
+        <div class="skill-icon coral">📈</div>
+        <div class="skill-name">Analytics &amp; Metrics</div>
+        <div class="tag-list">
+          <span class="tag active">KPI Tracking</span><span class="tag">Funnel Analysis</span><span class="tag active">Cohort Analysis</span><span class="tag">A/B Testing</span><span class="tag">RCA</span><span class="tag">Forecasting</span>
+        </div>
+      </div>
+      <div class="skill-card reveal" style="transition-delay:.3s">
+        <div class="skill-icon violet">🤝</div>
+        <div class="skill-name">Collaboration &amp; Delivery</div>
+        <div class="tag-list">
+          <span class="tag active">Stakeholder Mgmt</span><span class="tag">Requirement Scoping</span><span class="tag active">Data Storytelling</span><span class="tag">Agile</span><span class="tag">JIRA</span><span class="tag">Confluence</span>
+        </div>
+      </div>
+      <div class="skill-card reveal" style="transition-delay:.4s">
+        <div class="skill-icon gold">🧠</div>
+        <div class="skill-name">Machine Learning (Applied)</div>
+        <div class="tag-list">
+          <span class="tag">Regression</span><span class="tag active">Clustering</span><span class="tag">Scikit-learn</span><span class="tag">Time Series</span><span class="tag">Anomaly Detection</span>
+        </div>
+      </div>
+      <div class="skill-card reveal" style="transition-delay:.5s">
+        <div class="skill-icon green">🏦</div>
+        <div class="skill-name">Domain Knowledge</div>
+        <div class="tag-list">
+          <span class="tag active">Fintech</span><span class="tag">Payments</span><span class="tag active">Reconciliation</span><span class="tag">E-commerce</span><span class="tag">Retail Analytics</span><span class="tag">Operations</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PROJECTS ══ -->
+<section class="projects-section" id="projects">
+  <div class="section-container">
+    <p class="section-eyebrow reveal">Selected work</p>
+    <h2 class="section-heading reveal">Projects &amp; Impact</h2>
+    <p class="section-sub reveal">Real problems, real numbers. Each project below was scoped, built, and handed off to teams who use them daily.</p>
+
+    <div class="projects-grid">
+      <div class="project-card reveal" style="padding:0">
+        <div class="proj-img-wrap"><svg viewBox="0 0 460 170" xmlns="http://www.w3.org/2000/svg"><rect width="460" height="170" fill="#0f0f1a"/><rect x="0" y="0" width="110" height="170" fill="#16213e"/><text x="12" y="20" font-family="monospace" font-size="7" fill="#F5A623">📊 Live</text><text x="12" y="36" font-family="monospace" font-size="6.5" fill="rgba(255,255,255,0.3)">💳 Payments</text><text x="12" y="50" font-family="monospace" font-size="6.5" fill="rgba(255,255,255,0.3)">⚠ Alerts(3)</text><text x="12" y="64" font-family="monospace" font-size="6.5" fill="rgba(255,255,255,0.3)">📋 Reports</text><text x="122" y="18" font-family="sans-serif" font-size="8.5" fill="white" font-weight="bold">Reconciliation Monitor — Live</text><rect x="122" y="24" width="72" height="36" rx="5" fill="rgba(245,166,35,0.1)" stroke="rgba(245,166,35,0.25)" stroke-width="1"/><text x="130" y="37" font-family="monospace" font-size="6.5" fill="rgba(255,255,255,0.4)">Volume</text><text x="130" y="53" font-family="monospace" font-size="12" fill="#F5A623" font-weight="bold">5.2L</text><rect x="200" y="24" width="72" height="36" rx="5" fill="rgba(0,184,148,0.1)" stroke="rgba(0,184,148,0.25)" stroke-width="1"/><text x="208" y="37" font-family="monospace" font-size="6.5" fill="rgba(255,255,255,0.4)">Matched</text><text x="208" y="53" font-family="monospace" font-size="12" fill="#00B894" font-weight="bold">99.8%</text><rect x="278" y="24" width="72" height="36" rx="5" fill="rgba(225,112,85,0.1)" stroke="rgba(225,112,85,0.25)" stroke-width="1"/><text x="286" y="37" font-family="monospace" font-size="6.5" fill="rgba(255,255,255,0.4)">Flagged</text><text x="293" y="53" font-family="monospace" font-size="12" fill="#E17055" font-weight="bold">104</text><rect x="356" y="24" width="90" height="36" rx="5" fill="rgba(167,139,250,0.1)" stroke="rgba(167,139,250,0.25)" stroke-width="1"/><text x="364" y="37" font-family="monospace" font-size="6.5" fill="rgba(255,255,255,0.4)">Time saved</text><text x="366" y="53" font-family="monospace" font-size="12" fill="#A78BFA" font-weight="bold">3 hrs</text><rect x="122" y="70" width="210" height="88" rx="6" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)" stroke-width="1"/><text x="132" y="84" font-family="monospace" font-size="6" fill="rgba(255,255,255,0.3)">Weekly Match Rate Trend</text><rect x="136" y="140" width="14" height="12" rx="2" fill="rgba(245,166,35,0.4)"/><rect x="154" y="128" width="14" height="24" rx="2" fill="rgba(245,166,35,0.55)"/><rect x="172" y="115" width="14" height="37" rx="2" fill="rgba(245,166,35,0.7)"/><rect x="190" y="105" width="14" height="47" rx="2" fill="rgba(245,166,35,0.8)"/><rect x="208" y="95" width="14" height="57" rx="2" fill="#F5A623"/><rect x="226" y="88" width="14" height="64" rx="2" fill="#F5A623" opacity=".9"/><rect x="244" y="82" width="14" height="70" rx="2" fill="#F5A623"/><polyline points="130,148 148,138 166,125 184,113 202,103 220,95 238,88 256,82 300,78" stroke="#00B894" stroke-width="2" fill="none"/><rect x="340" y="70" width="106" height="88" rx="6" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)" stroke-width="1"/><text x="350" y="84" font-family="monospace" font-size="6" fill="rgba(255,255,255,0.3)">Live feed</text><text x="348" y="99" font-family="monospace" font-size="6" fill="#00B894">✓ TXN #48291</text><text x="348" y="111" font-family="monospace" font-size="6" fill="#00B894">✓ TXN #48292</text><text x="348" y="123" font-family="monospace" font-size="6" fill="#E17055">⚠ TXN #48293</text><text x="348" y="135" font-family="monospace" font-size="6" fill="#00B894">✓ TXN #48294</text><text x="348" y="147" font-family="monospace" font-size="6" fill="#00B894">✓ TXN #48295</text></svg></div>
+        <div style="padding:2rem"><span class="proj-tag bi">Power BI</span>
+        <h3 class="proj-title">Real-Time Payment Reconciliation Dashboard</h3>
+        <p class="proj-desc">Built an end-to-end reconciliation pipeline and Power BI dashboard tracking 500K+ daily transactions. Automated mismatch flagging replaced a 3-hour manual process.</p>
+        <div class="proj-metrics">
+          <div class="proj-metric"><div class="proj-metric-val">87%</div><div class="proj-metric-lbl">Mismatch reduction</div></div>
+          <div class="proj-metric"><div class="proj-metric-val">3 hrs</div><div class="proj-metric-lbl">Daily time saved</div></div>
+          <div class="proj-metric"><div class="proj-metric-val">500K+</div><div class="proj-metric-lbl">Daily transactions</div></div>
+        </div>
+        <div class="proj-footer">
+          <span class="chip">SQL</span><span class="chip">Power BI</span><span class="chip">DAX</span><span class="chip">Python</span>
+        </div>
+      </div></div>
+
+      <div class="project-card reveal" style="padding:0;transition-delay:.1s">
+        <div class="proj-img-wrap"><svg viewBox="0 0 460 160" xmlns="http://www.w3.org/2000/svg"><rect width="460" height="160" fill="#16213E"/><text x="18" y="18" font-family="monospace" font-size="7.5" fill="#F5A623">churn_model.py ▶ Running</text><rect x="18" y="26" width="192" height="122" rx="6" fill="rgba(0,0,0,0.28)" stroke="rgba(245,166,35,0.15)" stroke-width="1"/><text x="28" y="42" font-family="monospace" font-size="6.5" fill="rgba(255,255,255,0.45)">Model: XGBoost Classifier</text><text x="28" y="55" font-family="monospace" font-size="6.5" fill="#00B894">Accuracy:  82.4%</text><text x="28" y="67" font-family="monospace" font-size="6.5" fill="#00B894">Precision: 79.1%</text><text x="28" y="79" font-family="monospace" font-size="6.5" fill="#00B894">Recall:    81.6%</text><text x="28" y="91" font-family="monospace" font-size="6.5" fill="#A0C4FF">F1 Score:  0.803</text><text x="28" y="106" font-family="monospace" font-size="6" fill="rgba(255,255,255,0.3)">Top features:</text><text x="28" y="118" font-family="monospace" font-size="6" fill="rgba(255,255,255,0.5)">  login_freq  ████████ 0.28</text><text x="28" y="130" font-family="monospace" font-size="6" fill="rgba(255,255,255,0.5)">  last_txn    ██████   0.21</text><text x="28" y="142" font-family="monospace" font-size="6" fill="rgba(255,255,255,0.5)">  support_ct  ████     0.15</text><rect x="220" y="26" width="222" height="122" rx="6" fill="rgba(0,0,0,0.28)" stroke="rgba(245,166,35,0.15)" stroke-width="1"/><text x="230" y="42" font-family="sans-serif" font-size="7" fill="rgba(255,255,255,0.4)">Risk Distribution — 200K users</text><text x="230" y="60" font-family="sans-serif" font-size="7" fill="#E17055">● High  22%</text><rect x="230" y="63" width="200" height="8" rx="3" fill="rgba(255,255,255,0.07)"/><rect x="230" y="63" width="44" height="8" rx="3" fill="#E17055" opacity=".7"/><text x="230" y="85" font-family="sans-serif" font-size="7" fill="#F5A623">● Med   35%</text><rect x="230" y="88" width="200" height="8" rx="3" fill="rgba(255,255,255,0.07)"/><rect x="230" y="88" width="70" height="8" rx="3" fill="#F5A623" opacity=".65"/><text x="230" y="110" font-family="sans-serif" font-size="7" fill="#00B894">● Low   43%</text><rect x="230" y="113" width="200" height="8" rx="3" fill="rgba(255,255,255,0.07)"/><rect x="230" y="113" width="86" height="8" rx="3" fill="#00B894" opacity=".7"/><text x="230" y="140" font-family="monospace" font-size="7" fill="#F5A623">→ 18% churn reduction achieved</text></svg></div>
+        <div style="padding:2rem"><span class="proj-tag py">Python</span>
+        <h3 class="proj-title">Customer Churn Prediction Model</h3>
+        <p class="proj-desc">Designed a churn scoring model for a 200K-user SaaS product using gradient boosting. Built an ops dashboard so the retention team could action high-risk segments weekly.</p>
+        <div class="proj-metrics">
+          <div class="proj-metric"><div class="proj-metric-val">82%</div><div class="proj-metric-lbl">Model accuracy</div></div>
+          <div class="proj-metric"><div class="proj-metric-val">18%</div><div class="proj-metric-lbl">Churn reduction</div></div>
+          <div class="proj-metric"><div class="proj-metric-val">200K</div><div class="proj-metric-lbl">Users scored</div></div>
+        </div>
+        <div class="proj-footer">
+          <span class="chip">Python</span><span class="chip">scikit-learn</span><span class="chip">XGBoost</span><span class="chip">Tableau</span>
+        </div>
+      </div></div>
+
+      <div class="project-card reveal" style="padding:0;transition-delay:.15s">
+        <div class="proj-img-wrap"><svg viewBox="0 0 460 155" xmlns="http://www.w3.org/2000/svg"><rect width="460" height="155" fill="#0D2137"/><text x="18" y="18" font-family="monospace" font-size="7" fill="rgba(255,255,255,0.3)">// e_commerce_warehouse.sql</text><text x="18" y="34" font-family="sans-serif" font-size="7" fill="rgba(255,255,255,0.35)">BEFORE: 6 disconnected sources</text><rect x="18" y="40" width="46" height="24" rx="4" fill="rgba(225,112,85,0.15)" stroke="rgba(225,112,85,0.3)" stroke-width="1"/><text x="26" y="56" font-family="monospace" font-size="6" fill="#E17055">Shopify</text><rect x="70" y="40" width="46" height="24" rx="4" fill="rgba(225,112,85,0.15)" stroke="rgba(225,112,85,0.3)" stroke-width="1"/><text x="78" y="56" font-family="monospace" font-size="6" fill="#E17055">Ads API</text><rect x="122" y="40" width="46" height="24" rx="4" fill="rgba(225,112,85,0.15)" stroke="rgba(225,112,85,0.3)" stroke-width="1"/><text x="130" y="56" font-family="monospace" font-size="6" fill="#E17055">CRM</text><rect x="174" y="40" width="46" height="24" rx="4" fill="rgba(225,112,85,0.15)" stroke="rgba(225,112,85,0.3)" stroke-width="1"/><text x="182" y="56" font-family="monospace" font-size="6" fill="#E17055">Logistics</text><rect x="226" y="40" width="46" height="24" rx="4" fill="rgba(225,112,85,0.15)" stroke="rgba(225,112,85,0.3)" stroke-width="1"/><text x="234" y="56" font-family="monospace" font-size="6" fill="#E17055">Returns</text><rect x="278" y="40" width="46" height="24" rx="4" fill="rgba(225,112,85,0.15)" stroke="rgba(225,112,85,0.3)" stroke-width="1"/><text x="286" y="56" font-family="monospace" font-size="6" fill="#E17055">Finance</text><text x="160" y="82" font-family="monospace" font-size="8" fill="rgba(255,255,255,0.18)">▼ dbt + BigQuery</text><text x="18" y="100" font-family="sans-serif" font-size="7" fill="rgba(255,255,255,0.35)">AFTER: single self-serve warehouse</text><rect x="96" y="107" width="155" height="36" rx="8" fill="rgba(245,166,35,0.12)" stroke="rgba(245,166,35,0.3)" stroke-width="1.5"/><text x="134" y="122" font-family="monospace" font-size="7.5" fill="#F5A623">BigQuery</text><text x="122" y="135" font-family="monospace" font-size="7" fill="rgba(245,166,35,0.65)">Data Warehouse</text><line x1="251" y1="125" x2="285" y2="125" stroke="rgba(255,255,255,0.18)" stroke-width="1.5" stroke-dasharray="4,3"/><rect x="285" y="111" width="88" height="28" rx="5" fill="rgba(160,196,255,0.1)" stroke="rgba(160,196,255,0.3)" stroke-width="1"/><text x="295" y="123" font-family="sans-serif" font-size="7" fill="#A0C4FF">Power BI</text><text x="290" y="133" font-family="sans-serif" font-size="6" fill="rgba(160,196,255,0.55)">Live dashboards</text><text x="18" y="153" font-family="monospace" font-size="6.5" fill="#00B894">→ 40% faster decisions · 6 tools → 1</text></svg></div>
+        <div style="padding:2rem"><span class="proj-tag sql">SQL</span>
+        <h3 class="proj-title">E-Commerce Sales Intelligence Suite</h3>
+        <p class="proj-desc">Consolidated 6 siloed reporting tools into one BigQuery data warehouse with a self-serve Power BI layer. Leadership went from weekly PDF reports to live daily visibility.</p>
+        <div class="proj-metrics">
+          <div class="proj-metric"><div class="proj-metric-val">6→1</div><div class="proj-metric-lbl">Tools consolidated</div></div>
+          <div class="proj-metric"><div class="proj-metric-val">40%</div><div class="proj-metric-lbl">Faster decisions</div></div>
+        </div>
+        <div class="proj-footer">
+          <span class="chip">BigQuery</span><span class="chip">SQL</span><span class="chip">Power BI</span><span class="chip">dbt</span>
+        </div>
+      </div></div>
+
+      <div class="project-card reveal" style="padding:0;transition-delay:.2s">
+        <div class="proj-img-wrap"><svg viewBox="0 0 460 160" xmlns="http://www.w3.org/2000/svg"><rect width="460" height="160" fill="#1A1A2E"/><text x="18" y="18" font-family="sans-serif" font-size="8.5" fill="white" font-weight="bold">Operations KPI Tracker</text><text x="348" y="18" font-family="monospace" font-size="6.5" fill="#00B894">● LIVE 08:47</text><rect x="18" y="25" width="84" height="46" rx="5" fill="rgba(245,166,35,0.1)" stroke="rgba(245,166,35,0.2)" stroke-width="1"/><text x="26" y="40" font-family="sans-serif" font-size="6.5" fill="rgba(255,255,255,0.4)">SLA Compliance</text><text x="26" y="57" font-family="monospace" font-size="14" fill="#F5A623" font-weight="bold">98.2%</text><text x="26" y="68" font-family="monospace" font-size="5.5" fill="#00B894">↑ 3.1% vs last wk</text><rect x="110" y="25" width="84" height="46" rx="5" fill="rgba(0,184,148,0.1)" stroke="rgba(0,184,148,0.2)" stroke-width="1"/><text x="118" y="40" font-family="sans-serif" font-size="6.5" fill="rgba(255,255,255,0.4)">Tickets Closed</text><text x="118" y="57" font-family="monospace" font-size="14" fill="#00B894" font-weight="bold">1,284</text><text x="118" y="68" font-family="monospace" font-size="5.5" fill="#00B894">↑ Today</text><rect x="202" y="25" width="84" height="46" rx="5" fill="rgba(167,139,250,0.1)" stroke="rgba(167,139,250,0.2)" stroke-width="1"/><text x="210" y="40" font-family="sans-serif" font-size="6.5" fill="rgba(255,255,255,0.4)">Handle Time</text><text x="216" y="57" font-family="monospace" font-size="14" fill="#A78BFA" font-weight="bold">4.2m</text><text x="210" y="68" font-family="monospace" font-size="5.5" fill="#00B894">↓ 0.8m</text><rect x="294" y="25" width="84" height="46" rx="5" fill="rgba(225,112,85,0.1)" stroke="rgba(225,112,85,0.2)" stroke-width="1"/><text x="302" y="40" font-family="sans-serif" font-size="6.5" fill="rgba(255,255,255,0.4)">Escalations</text><text x="318" y="57" font-family="monospace" font-size="14" fill="#E17055" font-weight="bold">12</text><text x="302" y="68" font-family="monospace" font-size="5.5" fill="#E17055">↑ 2 today</text><rect x="386" y="25" width="60" height="46" rx="5" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.07)" stroke-width="1"/><text x="394" y="40" font-family="monospace" font-size="5.5" fill="rgba(255,255,255,0.3)">Efficiency</text><text x="396" y="55" font-family="monospace" font-size="10" fill="#F5A623" font-weight="bold">72%</text><text x="394" y="68" font-family="monospace" font-size="5.5" fill="#00B894">↑ gain</text><text x="18" y="90" font-family="sans-serif" font-size="6.5" fill="rgba(255,255,255,0.3)">Team heatmap (200 agents)</text><g transform="translate(18,96)"><rect x="0" y="0" width="11" height="11" rx="2" fill="rgba(0,184,148,0.8)"/><rect x="13" y="0" width="11" height="11" rx="2" fill="rgba(0,184,148,0.6)"/><rect x="26" y="0" width="11" height="11" rx="2" fill="rgba(245,166,35,0.7)"/><rect x="39" y="0" width="11" height="11" rx="2" fill="rgba(0,184,148,0.9)"/><rect x="52" y="0" width="11" height="11" rx="2" fill="rgba(0,184,148,0.5)"/><rect x="65" y="0" width="11" height="11" rx="2" fill="rgba(225,112,85,0.6)"/><rect x="78" y="0" width="11" height="11" rx="2" fill="rgba(0,184,148,0.7)"/><rect x="91" y="0" width="11" height="11" rx="2" fill="rgba(0,184,148,0.8)"/><rect x="0" y="13" width="11" height="11" rx="2" fill="rgba(245,166,35,0.5)"/><rect x="13" y="13" width="11" height="11" rx="2" fill="rgba(0,184,148,0.9)"/><rect x="26" y="13" width="11" height="11" rx="2" fill="rgba(0,184,148,0.8)"/><rect x="39" y="13" width="11" height="11" rx="2" fill="rgba(225,112,85,0.4)"/><rect x="52" y="13" width="11" height="11" rx="2" fill="rgba(0,184,148,0.7)"/><rect x="65" y="13" width="11" height="11" rx="2" fill="rgba(0,184,148,0.6)"/><rect x="78" y="13" width="11" height="11" rx="2" fill="rgba(245,166,35,0.8)"/><rect x="91" y="13" width="11" height="11" rx="2" fill="rgba(0,184,148,0.7)"/><rect x="0" y="26" width="11" height="11" rx="2" fill="rgba(0,184,148,0.6)"/><rect x="13" y="26" width="11" height="11" rx="2" fill="rgba(225,112,85,0.5)"/><rect x="26" y="26" width="11" height="11" rx="2" fill="rgba(0,184,148,0.9)"/><rect x="39" y="26" width="11" height="11" rx="2" fill="rgba(0,184,148,0.7)"/><rect x="52" y="26" width="11" height="11" rx="2" fill="rgba(245,166,35,0.6)"/><rect x="65" y="26" width="11" height="11" rx="2" fill="rgba(0,184,148,0.9)"/><rect x="78" y="26" width="11" height="11" rx="2" fill="rgba(0,184,148,0.5)"/><rect x="91" y="26" width="11" height="11" rx="2" fill="rgba(0,184,148,0.8)"/></g><rect x="230" y="83" width="216" height="66" rx="6" fill="rgba(0,0,0,0.2)" stroke="rgba(255,255,255,0.06)" stroke-width="1"/><text x="240" y="97" font-family="monospace" font-size="6" fill="rgba(255,255,255,0.3)">Daily digest — anomaly alerts</text><text x="240" y="110" font-family="monospace" font-size="6.5" fill="#E17055">⚠ Team C SLA dip detected</text><text x="240" y="122" font-family="monospace" font-size="6.5" fill="#F5A623">→ Auto-escalation triggered</text><text x="240" y="134" font-family="monospace" font-size="6.5" fill="#00B894">✓ Manager notified via Slack</text><text x="240" y="146" font-family="monospace" font-size="6.5" fill="#00B894">✓ 72% efficiency gain logged</text></svg></div>
+        <div style="padding:2rem"><span class="proj-tag dash">Excel + BI</span>
+        <h3 class="proj-title">Operations Efficiency Tracker</h3>
+        <p class="proj-desc">Built a KPI tracking system for a 200-person operations team. Automated daily digest emails with anomaly alerts, giving team leads actionable insights before 9 AM every day.</p>
+        <div class="proj-metrics">
+          <div class="proj-metric"><div class="proj-metric-val">72%</div><div class="proj-metric-lbl">Efficiency gain</div></div>
+          <div class="proj-metric"><div class="proj-metric-val">200</div><div class="proj-metric-lbl">Team members</div></div>
+        </div>
+        <div class="proj-footer">
+          <span class="chip">Python</span><span class="chip">Excel</span><span class="chip">Power Automate</span><span class="chip">SQL</span>
+        </div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ EXPERIENCE ══ -->
+<section class="exp-section" id="experience">
+  <div class="section-container">
+    <p class="section-eyebrow reveal" style="text-align:center">Career</p>
+    <h2 class="section-heading reveal" style="text-align:center;margin-bottom:.5rem">Work Experience</h2>
+    <p class="section-sub reveal" style="margin:0 auto 3rem;text-align:center">4+ years turning operational data into strategic clarity across fintech and e-commerce.</p>
+
+    <div class="timeline">
+      <div class="exp-item reveal">
+        <div class="exp-dot"><div class="exp-dot-inner"></div></div>
+        <div class="exp-body">
+          <div class="exp-top">
+            <div class="exp-role">Senior Data Analyst</div>
+            <div class="exp-date">Jan 2023 – Present</div>
+          </div>
+          <div class="exp-company">FinServe Analytics Pvt. Ltd. · Bangalore</div>
+          <ul class="exp-list">
+            <li>Owns end-to-end analytics for the payments vertical — from ETL pipeline design to executive dashboards tracking ₹2Cr+ daily volume.</li>
+            <li>Reduced reconciliation mismatches by 87% by building automated transaction-matching logic and real-time flagging in Power BI.</li>
+            <li>Partners with Product and Engineering to define KPIs for 3 new product lines; writes data specs that feed directly into engineering tickets.</li>
+            <li>Mentors 2 junior analysts and maintains the team's shared SQL library of 80+ reusable query templates.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item reveal" style="transition-delay:.1s">
+        <div class="exp-dot"><div class="exp-dot-inner"></div></div>
+        <div class="exp-body">
+          <div class="exp-top">
+            <div class="exp-role">Data Analyst</div>
+            <div class="exp-date">Jun 2021 – Dec 2022</div>
+          </div>
+          <div class="exp-company">ShopMart India · Mumbai</div>
+          <ul class="exp-list">
+            <li>Built the company's first self-serve analytics layer on BigQuery — reducing ad-hoc data requests to the data team by 60%.</li>
+            <li>Delivered a customer segmentation model (RFM + clustering) that increased repeat-purchase rate by 14% in 3 months.</li>
+            <li>Produced weekly insight reports for leadership covering sales, inventory turns, and marketing ROI across 5 categories.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item reveal" style="transition-delay:.2s">
+        <div class="exp-dot"><div class="exp-dot-inner"></div></div>
+        <div class="exp-body">
+          <div class="exp-top">
+            <div class="exp-role">Junior Data Analyst</div>
+            <div class="exp-date">Aug 2020 – May 2021</div>
+          </div>
+          <div class="exp-company">Quantify Solutions · Pune</div>
+          <ul class="exp-list">
+            <li>Supported 4 analyst leads with data cleaning, SQL reporting, and Excel-based financial models for BFSI clients.</li>
+            <li>Automated 6 recurring monthly reports using Python + scheduling, saving ~12 hours/month of manual effort.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTACT ══ -->
+<section class="contact-section" id="contact">
+  <div class="contact-inner">
+    <p class="section-eyebrow reveal">Let's connect</p>
+    <h2 class="section-heading reveal" style="margin-bottom:.75rem">Open to Full-Time Roles</h2>
+    <div class="avail-badge reveal">
+      <span class="avail-dot"></span>
+      Available — actively interviewing
+    </div>
+    <p class="section-sub reveal">Looking for Senior Data Analyst or Analytics Lead roles — ideally fintech, SaaS, or high-growth product companies. Open to Bangalore, Mumbai, Hyderabad, and remote.</p>
+
+    <div class="contact-cards">
+      <div class="contact-card reveal">
+        <div class="contact-card-icon">✉️</div>
+        <div class="contact-card-label">Email</div>
+        <div class="contact-card-val">aryan.mehta@email.com</div>
+      </div>
+      <div class="contact-card reveal" style="transition-delay:.1s">
+        <div class="contact-card-icon">💼</div>
+        <div class="contact-card-label">LinkedIn</div>
+        <div class="contact-card-val">linkedin.com/in/aryan-mehta</div>
+      </div>
+      <div class="contact-card reveal" style="transition-delay:.2s">
+        <div class="contact-card-icon">🐙</div>
+        <div class="contact-card-label">GitHub</div>
+        <div class="contact-card-val">github.com/aryanmehta-data</div>
+      </div>
+      <div class="contact-card reveal" style="transition-delay:.3s">
+        <div class="contact-card-icon">📍</div>
+        <div class="contact-card-label">Location</div>
+        <div class="contact-card-val">Bangalore, India</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Aryan Mehta · Data Analyst · Built with purpose</p>
+</footer>
+
+<script>
+// Nav hamburger
+const hb = document.getElementById('hamburger'), nl = document.getElementById('navLinks');
+hb.addEventListener('click', () => { hb.classList.toggle('open'); nl.classList.toggle('open'); });
+nl.querySelectorAll('a').forEach(l => l.addEventListener('click', () => { hb.classList.remove('open'); nl.classList.remove('open'); }));
+
+// Reveal on scroll
+const ro = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const d = parseFloat(e.target.style.transitionDelay || 0) * 1000;
+      setTimeout(() => e.target.classList.add('show'), d);
+      ro.unobserve(e.target);
+    }
+  });
+}, { threshold: .1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+// Counter animation
+function animateCount(el, target, suffix, duration) {
+  const start = performance.now();
+  const update = now => {
+    const p = Math.min((now - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - p, 3);
+    el.textContent = Math.round(eased * target) + suffix;
+    if (p < 1) requestAnimationFrame(update);
+  };
+  requestAnimationFrame(update);
+}
+const co = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      animateCount(document.getElementById('cnt1'), 28, '', 1400);
+      animateCount(document.getElementById('cnt2'), 85, '%', 1600);
+      animateCount(document.getElementById('cnt3'), 40, '+', 1200);
+      animateCount(document.getElementById('cnt4'), 60, '+', 1500);
+      co.disconnect();
+    }
+  });
+}, { threshold: .5 });
+const panel = document.querySelector('.hero-panel');
+if (panel) co.observe(panel);
+</script>
+</body>
+</html>
